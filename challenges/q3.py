@@ -17,3 +17,11 @@ def first_missing_positive(arr):
         # Remember, must be sequential
         i += 1
     return i
+
+def first_missing_positive2(nums):
+    pass
+
+        
+
+    
+print(first_missing_positive2([3,4,-1,1]))

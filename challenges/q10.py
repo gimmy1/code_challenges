@@ -4,12 +4,18 @@ For example, given the string "([])[]({})", you should return true.
 
 Given the string "([)]" or "((()", you should return false."""
 def balanced_brackets(expression):
-    mapping = dict(zip('([{', ')]}'))
-    import pdb; pdb.set_trace()
-    queue = []
-    for letter in expression:
-        if letter in mapping:
-            queue.append(mapping[letter])
-        elif not queue or letter != queue.pop():
+    matching = dict(zip('({[', ')}]'))
+    stack = []
+    for char in expression:
+        import pdb; pdb.set_trace()
+        if char in matching:
+            stack.append(char)
+        elif not stack or matching[stack[-1]] != char:
             return False
-    return not queue
+        
+        if matching[stack[-1]] == char:
+            stack.pop()
+	
+    return len(stack) == 0
+
+print(balanced_brackets("(){}["))

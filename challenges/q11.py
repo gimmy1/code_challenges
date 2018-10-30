@@ -11,7 +11,7 @@ def rgb(letters):
     for i in range(len(letters)):
         if first < letters[i]:
             import pdb; pdb.set_trace()
-            first, letters[i] = letters[i], first
+            swap(first, letters[i])
             break
     return letters
 
