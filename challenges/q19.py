@@ -8,22 +8,28 @@ Output => [['a'], ['b', 'c'], ['b', 'd', 'e']]
 
 """
 from collections import Mapping
-def find_all_keys(dictionary, target, *args):
+def find_all_keys(dictionary, target, *args, **kwargs):
     values = []
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
+    inner_values = []
     for key in dictionary:
         if dictionary[key] == target:
             if args:
-                for arg in args:
-                    values.append(arg)
-                values[0].extend([key])
+                for arg in args[0]:
+                    inner_values.append(arg)
+            if kwargs:
+                inner_values.append(kwargs['key'])
+                inner_values.append(key)
+                
+                values.append(inner_values)
             else:
                 values.append([key])
         elif isinstance(dictionary[key], Mapping): # or dict
-            if args:
-                values.extend(find_all_keys(dictionary[key], target, values[0][:-1], key))
+            if kwargs:
+                arg_list = inner_values[:-1]
+                values.extend(find_all_keys(dictionary[key], target, arg_list, key=key))
             else:
-                values.extend(find_all_keys(dictionary[key], target, key))
+                values.extend(find_all_keys(dictionary[key], target, key=key))
         
     return values
 
