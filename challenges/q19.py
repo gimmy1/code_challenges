@@ -17,10 +17,9 @@ def find_all_keys(dictionary, target, *args, **kwargs):
             if args:
                 for arg in args[0]:
                     inner_values.append(arg)
-            if kwargs:
+            elif kwargs:
                 inner_values.append(kwargs['key'])
                 inner_values.append(key)
-                
                 values.append(inner_values)
             else:
                 values.append([key])
